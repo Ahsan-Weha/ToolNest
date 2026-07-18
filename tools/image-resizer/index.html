@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free offline Image Resizer. Resize images, lock aspect ratio, and convert to WebP/PNG/JPG instantly in your browser — no uploads, no server.">
+    <title>Image Resizer — Free Online Tool | ToolNest</title>
+    <!-- Core and specific stylesheets -->
+    <link rel="stylesheet" href="../../css/design-system.css">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../template.css">
+    <link rel="stylesheet" href="style.css">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Image Resizer & Background Remover - ToolNest">
+    <meta property="og:description" content="Free offline Image Resizer & Background Remover. Resize images, lock aspect ratio, convert to WebP/PNG/JPG, and make backgrounds transparent client-side.">
+    <meta property="og:site_name" content="ToolNest">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Image Resizer & Background Remover - ToolNest">
+    <meta name="twitter:description" content="Free offline Image Resizer & Background Remover. Resize images, lock aspect ratio, convert to WebP/PNG/JPG, and make backgrounds transparent client-side.">
+</head>
+<body data-tool-id="image-resizer">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Mobile Drawer Navigation -->
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay" aria-hidden="true"></div>
+
+    <div id="mobile-drawer" class="mobile-drawer" role="dialog" aria-label="Navigation menu">
+        <div class="mobile-drawer-header">
+            <a href="../../index.html" class="flex items-center gap-1">
+                <div class="icon-wrapper" style="background:var(--gradient-brand);width:2rem;height:2rem;border-radius:var(--radius-sm)">
+                    <svg class="icon" style="color:white;width:1em;height:1em" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                </div>
+                <span class="text-gradient" style="font-weight:var(--weight-extrabold);font-family:var(--font-display);font-size:var(--text-lg)">ToolNest</span>
+            </a>
+            <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Close menu">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <nav class="mobile-drawer-body">
+            <a href="../../index.html" class="mobile-nav-link">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                Homepage
+            </a>
+            <a href="../../index.html#categories" class="mobile-nav-link">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+                All Tools
+            </a>
+            <div class="mobile-drawer-divider"></div>
+            <a href="../../design-system.html" class="mobile-nav-link">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                Design System
+            </a>
+        </nav>
+        <div class="mobile-drawer-footer">
+            <button data-theme-toggle class="btn btn-glass" style="width:100%">
+                <svg class="icon theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                <svg class="icon theme-icon-moon" style="display:none" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                <span class="theme-text-label">Light Mode</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Search Overlay -->
+    <div id="search-overlay" role="dialog" aria-label="Search tools" aria-modal="true">
+        <div class="search-overlay-box">
+            <div class="search-overlay-input-row">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color:var(--text-muted);flex-shrink:0"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <input id="overlay-search-input" type="text" placeholder="Search all tools…" autocomplete="off">
+                <button id="search-overlay-close" class="search-overlay-close">ESC</button>
+            </div>
+            <div id="overlay-search-results" class="search-overlay-results"></div>
+        </div>
+    </div>
+
+    <!-- Sticky Main Navigation Header -->
+    <nav class="main-nav" style="position: sticky; top: 0; z-index: 100; background: var(--glass-bg); border-bottom: 1px solid var(--glass-border); backdrop-filter: var(--glass-backdrop); -webkit-backdrop-filter: var(--glass-backdrop); padding: var(--spacing-15) 0;">
+        <div class="container container-xl flex justify-between items-center">
+            <a href="../../index.html" class="flex items-center gap-1">
+                <div class="icon-wrapper" style="background:var(--gradient-brand);width:2.2rem;height:2.2rem;border-radius:var(--radius-sm)">
+                    <svg class="icon" style="color:white;width:1.1em;height:1.1em" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                </div>
+                <span class="title-3 text-gradient" style="font-weight:var(--weight-extrabold);letter-spacing:-0.02em">ToolNest</span>
+            </a>
+
+            <div class="flex items-center gap-1">
+                <a href="../../index.html#categories" class="btn btn-ghost btn-sm nav-links-desktop">All Tools</a>
+                <button class="nav-search-trigger" data-search-open aria-label="Search (Ctrl+K)">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    <span>Search</span>
+                    <kbd style="font-size:0.6rem;background:var(--border-color);padding:1px 5px;border-radius:4px;color:var(--text-muted)">⌘K</kbd>
+                </button>
+                <button data-theme-toggle class="btn btn-glass btn-sm" aria-label="Toggle theme">
+                    <svg class="icon theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <svg class="icon theme-icon-moon" style="display:none" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+                <button id="hamburger-btn" class="hamburger-btn" aria-label="Open menu">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Workspace -->
+    <main id="main-content" class="container container-xl py-4">
+        
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <a href="../../index.html">Home</a>
+            <span class="breadcrumbs-separator">&rsaquo;</span>
+            <a href="../../index.html#categories">Image Tools</a>
+            <span class="breadcrumbs-separator">&rsaquo;</span>
+            <span style="color:var(--text-main);font-weight:var(--weight-semibold)">Image Resizer</span>
+        </div>
+
+        <!-- Tool Page Hero -->
+        <section class="mb-4 anim-fade-in">
+            <div class="flex items-start justify-between gap-2 flex-wrap">
+                <div class="flex flex-col gap-1">
+                    <div class="flex items-center gap-1 flex-wrap">
+                        <span class="badge badge-success">Offline Enabled</span>
+                        <span class="badge badge-primary">Canvas Engine</span>
+                    </div>
+                    <h1 class="title-1">Image Resizer</h1>
+                    <p class="text-muted text-lg" style="max-width:680px;line-height:var(--lh-relaxed)">
+                        Resize your images by pixel dimensions, swap export formats, and adjust quality — all instantly in your browser with zero uploads.
+                    </p>
+                </div>
+                <button class="favorite-btn" data-fav-id="image-resizer" aria-label="Add to favorites" title="Save to favorites">
+                    <svg class="fav-icon-fill" width="16" height="16" viewBox="0 0 24 24" fill="#f43f5e" stroke="#f43f5e"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                    <svg class="fav-icon-outline" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Tool Interface Panel -->
+        <section class="tool-container mb-8" id="tool-interface" style="position:relative;">
+            <div class="tool-interface-card card-glass">
+
+
+
+                <!-- Dropzone Image Selector -->
+                <div id="file-dropzone" class="dropzone mb-3">
+                    <input type="file" id="file-input" class="file-input-hidden" accept="image/*">
+                    <div class="dropzone-icon">
+                        <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    </div>
+                    <div>
+                        <h4 class="title-4 mb-05">Drop your image here</h4>
+                        <p class="text-muted text-sm">or click to browse local files (Supports JPEG, PNG, WebP, GIF)</p>
+                    </div>
+                </div>
+
+                <!-- Selected file metadata details -->
+                <div id="selected-file-details" class="card mb-3" style="display:none; padding:var(--spacing-2); border-color:var(--primary);">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-15">
+                            <div class="icon-wrapper" style="background-color: var(--primary-glow); border-radius: var(--radius-sm)">
+                                <svg class="icon text-gradient" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            </div>
+                            <div>
+                                <div class="file-name weight-semibold text-main">logo.png</div>
+                                <div class="file-size text-xs text-muted">0 KB</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-ghost btn-sm text-danger" id="tool-reset" aria-label="Remove Image">
+                            <svg class="icon" style="color:var(--error)" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Canvas Preview Stage Grid (Initially Hidden) -->
+                <div id="image-preview-section" style="display: none;" class="mb-3">
+                    <div class="preview-stage mb-2">
+                        <!-- Left: Original View -->
+                        <div class="preview-box">
+                            <div class="info-display-row">
+                                <span>Original Canvas</span>
+                                <span id="original-dimensions-display">Eye-Dropper target</span>
+                            </div>
+                            <div class="preview-canvas-wrapper">
+                                <canvas id="canvas-original" class="preview-canvas"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Right: Output View -->
+                        <div class="preview-box">
+                            <div class="info-display-row">
+                                <span>Processed Output Preview</span>
+                                <span id="processed-size-display">Weight calculations...</span>
+                            </div>
+                            <div class="preview-canvas-wrapper transparency-grid">
+                                <canvas id="canvas-processed" class="preview-canvas"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB A: Resizer Controls -->
+                <div id="resizer-settings-tab" class="tool-tab-panel">
+                    <div class="grid grid-cols-1 grid-sm-2 gap-2 mb-3">
+                        <!-- Dimensions -->
+                        <div class="form-group">
+                            <span class="label">Resize Dimensions (px)</span>
+                            <div class="flex items-center gap-1">
+                                <input type="number" id="resize-width" class="input" placeholder="Width" aria-label="Resized width">
+                                <button type="button" id="lock-ratio-btn" class="aspect-lock-btn locked" title="Aspect Ratio Locked">
+                                    <!-- Lock SVG -->
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                                </button>
+                                <input type="number" id="resize-height" class="input" placeholder="Height" aria-label="Resized height">
+                            </div>
+                        </div>
+
+                        <!-- Export Options -->
+                        <div class="form-group">
+                            <label for="export-format" class="label">Convert Export Format</label>
+                            <select id="export-format" class="select">
+                                <option value="image/png">PNG (Lossless Transparency)</option>
+                                <option value="image/webp" selected>WebP (Optimized Speed)</option>
+                                <option value="image/jpeg">JPEG (No Transparency)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-2 mb-3">
+                        <!-- Compression Quality Slider -->
+                        <div class="form-group">
+                            <div class="flex justify-between items-center label">
+                                <span>Compression Output Quality</span>
+                                <span id="export-quality-val" class="range-val">80%</span>
+                            </div>
+                            <div class="range-slider-group">
+                                <input type="range" id="export-quality" class="range-slider" min="1" max="100" value="80">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Actions row -->
+                    <div class="actions-bar">
+                        <button class="btn btn-secondary btn-sm" onclick="document.getElementById('tool-reset').click()">Clear All</button>
+                        <button class="btn btn-primary" id="process-image-btn">Resize & Process</button>
+                    </div>
+                </div>
+
+
+                <!-- Global Download buttons bar -->
+                <div class="actions-bar" style="border-top: 1px solid var(--border-color); padding-top: var(--spacing-2); margin-top: var(--spacing-2)">
+                    <button class="btn btn-success btn-lg" id="download-image-btn" style="width: 100%; @media (min-width: 640px) { width: auto; }">
+                        <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        <span>Download Resized Image</span>
+                    </button>
+                </div>
+
+                <!-- Loading Spinner overlay -->
+                <div class="tool-loading-overlay" id="tool-loader">
+                    <div class="loader-ring"></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Tool Introduction description -->
+        <section class="tool-details-section">
+            <h3 class="title-3">About Image Resizing & Color Keying</h3>
+            <p class="text-muted" style="line-height: var(--lh-relaxed);">
+                This client-side utility provides high-fidelity canvas scale options and background separations. Need to fit standard grid dimensions for profile pictures, compressed assets for site loading optimizations, or remove simple white/black blocks from graphic transparent files? The Image Resizer lets you process pixel configurations instantly in memory. Perfect for developer portfolios, blog listings, or quick offline conversions.
+            </p>
+        </section>
+
+        <!-- How It Works steps -->
+        <section class="tool-details-section">
+            <h3 class="title-3">How it Works</h3>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">01</div>
+                    <h5 class="title-5">Upload Local Image</h5>
+                    <p class="text-muted text-sm">Drag and drop your image directly onto the interface area or click to select a file locally.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">02</div>
+                    <h5 class="title-5">Resize or Select Color</h5>
+                    <p class="text-muted text-sm">Adjust pixel values with Maintain Ratio locked, or choose target background transparency tolerance metrics.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">03</div>
+                    <h5 class="title-5">Instantly Download</h5>
+                    <p class="text-muted text-sm">Choose PNG, JPEG, or WebP conversion, fine-tune compression levels, and click download.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits details -->
+        <section class="tool-details-section">
+            <h3 class="title-3">Resizing Advantages</h3>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <svg class="icon benefit-icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    <div>
+                        <h5 class="title-5 mb-05">Secure local memory</h5>
+                        <p class="text-muted text-sm">Everything compiles directly inside your web browser sandbox. No uploads mean complete protection.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <svg class="icon benefit-icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    <div>
+                        <h5 class="title-5 mb-05">Lightning conversion speeds</h5>
+                        <p class="text-muted text-sm">Canvas compilation processes pixels instantly, avoiding cloud network queues.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <svg class="icon benefit-icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                    <div>
+                        <h5 class="title-5 mb-05">Runs offline anytime</h5>
+                        <p class="text-muted text-sm">Useful on remote jobs. Keep resizing documents offline without connections.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQs accordion -->
+        <section class="tool-details-section">
+            <h3 class="title-3 text-center mb-3">Frequently Asked Questions</h3>
+            <div class="faq-list" style="max-width: 780px; margin: 0 auto">
+                <div class="faq-accordion">
+                    <button class="faq-trigger" aria-expanded="false">
+                        <span class="faq-question">Why WebP is recommended for web formatting?</span>
+                        <svg class="faq-icon-svg" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-answer">
+                            WebP delivers smaller file sizes (up to 30% reduction compared to JPEG or PNG) while supporting alpha channel transparency. That optimizes page speed scores dramatically.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-accordion">
+                    <button class="faq-trigger" aria-expanded="false">
+                        <span class="faq-question">How does chroma key background removal work client-side?</span>
+                        <svg class="faq-icon-svg" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-answer">
+                            When you select a pixel color, our filter scans the image matrix array. It computes Euclidean color distances between the pixels and selected color target. Matching channels within the distance tolerance get set to 0 alpha (fully transparent).
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-accordion">
+                    <button class="faq-trigger" aria-expanded="false">
+                        <span class="faq-question">What tolerance setting is recommended?</span>
+                        <svg class="faq-icon-svg" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-answer">
+                            For pure solid backgrounds (like flat white JPEG canvases), a low tolerance (e.g. 15-30) is perfect. For slightly gradient backdrops, increase the value slowly up to 50-70 to remove neighboring shadows.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Utilities Grid -->
+        <section class="tool-details-section" style="border-top: 1px solid var(--border-color); padding-top: var(--spacing-6)">
+            <h3 class="title-3">Related tools</h3>
+            <div class="grid grid-cols-1 grid-md-3 gap-2 mt-3">
+                <a href="../pdf-compressor/index.html" class="card card-interactive">
+                    <div class="card-header" style="margin-bottom: var(--spacing-1)">
+                        <div class="icon-wrapper" style="background: var(--primary-glow); border-radius: var(--radius-md)">
+                            <svg class="icon text-gradient" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        </div>
+                    </div>
+                    <h4 class="title-4 mb-1">PDF Compressor</h4>
+                    <p class="text-muted text-sm">Optimize your document weight profiles without formatting loss.</p>
+                </a>
+                
+                <a href="../json-formatter/index.html" class="card card-interactive">
+                    <div class="card-header" style="margin-bottom: var(--spacing-1)">
+                        <div class="icon-wrapper" style="background: var(--primary-glow); border-radius: var(--radius-md)">
+                            <svg class="icon text-gradient" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                        </div>
+                    </div>
+                    <h4 class="title-4 mb-1">JSON Formatter</h4>
+                    <p class="text-muted text-sm">Clean, indent, validate syntax files, and minify keys.</p>
+                </a>
+                
+                <a href="../markdown-editor/index.html" class="card card-interactive">
+                    <div class="card-header" style="margin-bottom: var(--spacing-1)">
+                        <div class="icon-wrapper" style="background: var(--primary-glow); border-radius: var(--radius-md)">
+                            <svg class="icon text-gradient" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                        </div>
+                    </div>
+                    <h4 class="title-4 mb-1">Markdown Editor</h4>
+                    <p class="text-muted text-sm">Format plain text markup content with real-time renders.</p>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer style="margin-top: var(--spacing-12); padding: var(--spacing-6) 0 var(--spacing-4) 0; border-top: 1px solid var(--border-color); background: var(--bg-card); text-align: left;">
+        <div class="container container-xl">
+            <div class="grid grid-cols-1 grid-md-2 grid-lg-4 gap-4 mb-6">
+                <div>
+                    <h5 class="title-5 mb-1" style="font-weight: var(--weight-extrabold);">ToolNest</h5>
+                    <p class="text-muted text-sm" style="line-height: var(--lh-snug);">Free browser-based utility tools centered around strict data privacy and responsive performance.</p>
+                </div>
+                <div>
+                    <h6 class="title-6 mb-1">Categories</h6>
+                    <ul style="list-style: none;" class="flex flex-col gap-05">
+                        <li><a href="../../index.html#categories" class="text-sm text-muted">PDF Suite</a></li>
+                        <li><a href="../../index.html#categories" class="text-sm text-muted">Image Converters</a></li>
+                        <li><a href="../../index.html#categories" class="text-sm text-muted">Text Tools</a></li>
+                        <li><a href="../../index.html#categories" class="text-sm text-muted">Developer Utilities</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h6 class="title-6 mb-1">Navigation</h6>
+                    <ul style="list-style: none;" class="flex flex-col gap-05">
+                        <li><a href="../../design-system.html" class="text-sm text-muted">Design System</a></li>
+                        <li><a href="../../index.html" class="text-sm text-muted">Homepage</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h6 class="title-6 mb-1">Privacy Guarantee</h6>
+                    <p class="text-sm text-muted">No cloud server interaction. Files remain local inside browser runtime memory blocks.</p>
+                </div>
+            </div>
+            
+            <hr style="border: 0; border-top: 1px solid var(--border-color); margin-bottom: var(--spacing-3);">
+            <div class="text-center">
+                <p class="footer-credit" style="text-align: center;">
+                    © 2026 TOOLNEST — Made with <span style="color:#e25555;">&#10084;&#65039;</span> by
+                    <a class="text-gradient" href="https://ahsan-weha.vercel.app" target="_blank"
+                        rel="noopener noreferrer">
+                        Ahsan Weha
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" aria-label="Back to top">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 15l7-7 7 7"/></svg>
+    </button>
+
+    <!-- Toast stack -->
+    <div id="tn-toast-container"></div>
+
+    <!-- Modal root -->
+    <div id="tn-modal-root"></div>
+
+    <!-- Core interactions script followed by specific tool controller -->
+    <script src="../../js/design-system.js"></script>
+    <script src="../../js/app.js"></script>
+    <script src="main.js"></script>
+    <script>
+        function switchToolTab(btn, tabId) {
+            // Deactivate tabs
+            btn.parentNode.querySelectorAll('.tab-item').forEach(item => item.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Hide panels
+            const interfaceCard = btn.closest('.tool-interface-card');
+            interfaceCard.querySelectorAll('.tool-tab-panel').forEach(panel => panel.style.display = 'none');
+
+            // Show active panel
+            document.getElementById(tabId).style.display = 'block';
+        }
+    </script>
+</body>
+</html>

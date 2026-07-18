@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" id="meta-desc" content="Free offline tools on ToolNest. Built entirely using client-side code for ultimate speed and privacy.">
+    <title>Meta Tag Generator - SEO Meta Tags | ToolNest</title>
+    <!-- Core and specific stylesheets -->
+    <link rel="stylesheet" href="../../css/design-system.css">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../template.css">
+    <style>
+        /* FAQ accordion styling for runtime placeholder */
+        .faq-trigger {
+            width: 100%; padding: var(--spacing-2) var(--spacing-3);
+            display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer; text-align: left; background: none; border: none;
+        }
+        .faq-question { font-size: var(--text-base); font-weight: var(--weight-bold); color: var(--text-main); }
+        .faq-icon-svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-width: 2px; stroke-linecap: round; stroke-linejoin: round; transition: transform var(--transition-normal); color: var(--text-muted); }
+        .faq-content { max-height: 0; overflow: hidden; padding: 0 var(--spacing-3); transition: max-height var(--transition-normal) ease-out; }
+        .faq-answer { padding-bottom: var(--spacing-2); font-size: var(--text-sm); color: var(--text-muted); line-height: var(--lh-relaxed); }
+        .faq-accordion { border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-card); overflow: hidden; transition: border-color var(--transition-normal), box-shadow var(--transition-normal); margin-bottom: var(--spacing-15); }
+        .faq-accordion:hover { border-color: var(--border-color-hover); }
+        .faq-accordion.active { border-color: var(--primary); box-shadow: 0 4px 15px -3px var(--primary-glow); }
+        .faq-accordion.active .faq-icon-svg { transform: rotate(180deg); color: var(--primary); }
+        .faq-accordion.active .faq-content { max-height: 250px; }
+    </style>
+</head>
+<body data-tool-id="meta-tag-generator">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Mobile Drawer Navigation -->
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay" aria-hidden="true"></div>
+
+    <div id="mobile-drawer" class="mobile-drawer" role="dialog" aria-label="Navigation menu">
+        <div class="mobile-drawer-header">
+            <a href="../../index.html" class="flex items-center gap-1">
+                <div class="icon-wrapper" style="background:var(--gradient-brand);width:2rem;height:2rem;border-radius:var(--radius-sm)">
+                    <svg class="icon" style="color:white;width:1em;height:1em" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                </div>
+                <span class="text-gradient" style="font-weight:var(--weight-extrabold);font-family:var(--font-display);font-size:var(--text-lg)">ToolNest</span>
+            </a>
+            <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Close menu">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <nav class="mobile-drawer-body">
+            <a href="../../index.html" class="mobile-nav-link">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                Homepage
+            </a>
+            <a href="../../index.html#categories" class="mobile-nav-link">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+                All Tools
+            </a>
+            <div class="mobile-drawer-divider"></div>
+            <a href="../../design-system.html" class="mobile-nav-link">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                Design System
+            </a>
+        </nav>
+        <div class="mobile-drawer-footer">
+            <button data-theme-toggle class="btn btn-glass" style="width:100%">
+                <svg class="icon theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                <svg class="icon theme-icon-moon" style="display:none" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                <span class="theme-text-label">Light Mode</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Search Overlay -->
+    <div id="search-overlay" role="dialog" aria-label="Search tools" aria-modal="true">
+        <div class="search-overlay-box">
+            <div class="search-overlay-input-row">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color:var(--text-muted);flex-shrink:0"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <input id="overlay-search-input" type="text" placeholder="Search all tools…" autocomplete="off">
+                <button id="search-overlay-close" class="search-overlay-close">ESC</button>
+            </div>
+            <div id="overlay-search-results" class="search-overlay-results"></div>
+        </div>
+    </div>
+
+    <!-- Sticky Main Navigation Header -->
+    <nav class="main-nav" style="position: sticky; top: 0; z-index: 100; background: var(--glass-bg); border-bottom: 1px solid var(--glass-border); backdrop-filter: var(--glass-backdrop); -webkit-backdrop-filter: var(--glass-backdrop); padding: var(--spacing-15) 0;">
+        <div class="container container-xl flex justify-between items-center">
+            <a href="../../index.html" class="flex items-center gap-1">
+                <div class="icon-wrapper" style="background:var(--gradient-brand);width:2.2rem;height:2.2rem;border-radius:var(--radius-sm)">
+                    <svg class="icon" style="color:white;width:1.1em;height:1.1em" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                </div>
+                <span class="title-3 text-gradient" style="font-weight:var(--weight-extrabold);letter-spacing:-0.02em">ToolNest</span>
+            </a>
+
+            <div class="flex items-center gap-1">
+                <a href="../../index.html#categories" class="btn btn-ghost btn-sm nav-links-desktop">All Tools</a>
+                <button class="nav-search-trigger" data-search-open aria-label="Search (Ctrl+K)">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    <span>Search</span>
+                    <kbd style="font-size:0.6rem;background:var(--border-color);padding:1px 5px;border-radius:4px;color:var(--text-muted)">⌘K</kbd>
+                </button>
+                <button data-theme-toggle class="btn btn-glass btn-sm" aria-label="Toggle theme">
+                    <svg class="icon theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <svg class="icon theme-icon-moon" style="display:none" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+                <button id="hamburger-btn" class="hamburger-btn" aria-label="Open menu">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Workspace -->
+    <!-- Accessibility H1 -->
+    <h1 class="sr-only">Meta Tag Generator</h1>
+    <main id="main-content" class="container container-xl py-4">
+        
+        <!-- Breadcrumbs Placeholder -->
+        <div id="ph-breadcrumbs"></div>
+
+        <!-- Tool Page Hero Placeholder -->
+        <div id="ph-hero"></div>
+
+        <!-- Tool Interface Panel -->
+        <section class="tool-container mb-8" id="tool-interface">
+            <div class="tool-interface-card card-glass">
+
+                <!-- Tab Switcher -->
+                <div class="flex gap-1 mb-3" style="border-bottom: 1px solid var(--border-color); padding-bottom: var(--spacing-2);">
+                    <button class="btn btn-primary btn-sm tab-btn active" data-tab="basic">Basic SEO</button>
+                    <button class="btn btn-ghost btn-sm tab-btn" data-tab="og">Open Graph</button>
+                    <button class="btn btn-ghost btn-sm tab-btn" data-tab="twitter">Twitter Card</button>
+                </div>
+
+                <div class="tool-split-view mb-3">
+                    <!-- Left: Form inputs -->
+                    <div class="flex flex-col gap-2">
+
+                        <!-- BASIC SEO TAB -->
+                        <div id="tab-basic" class="tab-panel">
+                            <div class="editor-panel-title mb-15"><span>Page Information</span></div>
+                            <div class="form-group mb-15">
+                                <div class="flex justify-between items-center mb-05">
+                                    <label for="meta-title" class="text-xs weight-bold text-muted uppercase">Page Title</label>
+                                    <span id="counter-title" class="text-xs text-muted">0 / 60</span>
+                                </div>
+                                <input type="text" id="meta-title" class="input" placeholder="My Awesome Page Title">
+                                <div id="warn-title" class="text-xs mt-05" style="display:none; color: var(--danger);">Title exceeds 60 characters — may be truncated in search results.</div>
+                            </div>
+                            <div class="form-group mb-15">
+                                <div class="flex justify-between items-center mb-05">
+                                    <label for="meta-description-input" class="text-xs weight-bold text-muted uppercase">Meta Description</label>
+                                    <span id="counter-desc" class="text-xs text-muted">0 / 160</span>
+                                </div>
+                                <textarea id="meta-description-input" class="input" rows="3" placeholder="Describe your page content clearly and concisely..." style="resize: vertical;"></textarea>
+                                <div id="warn-desc" class="text-xs mt-05" style="display:none; color: var(--danger);">Description exceeds 160 characters — may be truncated.</div>
+                            </div>
+                            <div class="form-group mb-15">
+                                <label for="meta-keywords" class="text-xs weight-bold text-muted uppercase mb-05">Keywords <span class="text-muted" style="font-weight:400;">(comma separated)</span></label>
+                                <input type="text" id="meta-keywords" class="input" placeholder="seo, tools, generator, meta tags">
+                            </div>
+                            <div class="form-group mb-15">
+                                <label for="meta-author" class="text-xs weight-bold text-muted uppercase mb-05">Author</label>
+                                <input type="text" id="meta-author" class="input" placeholder="Your Name or Brand">
+                            </div>
+                            <div class="form-group mb-15">
+                                <label for="meta-canonical" class="text-xs weight-bold text-muted uppercase mb-05">Canonical URL</label>
+                                <input type="url" id="meta-canonical" class="input" placeholder="https://example.com/page">
+                            </div>
+                            <div class="form-group">
+                                <label for="meta-robots" class="text-xs weight-bold text-muted uppercase mb-05">Robots Directive</label>
+                                <select id="meta-robots" class="input" style="cursor:pointer;">
+                                    <option value="index, follow">index, follow (Default)</option>
+                                    <option value="noindex, follow">noindex, follow</option>
+                                    <option value="index, nofollow">index, nofollow</option>
+                                    <option value="noindex, nofollow">noindex, nofollow</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- OPEN GRAPH TAB -->
+                        <div id="tab-og" class="tab-panel" style="display:none;">
+                            <div class="editor-panel-title mb-15"><span>Open Graph (Facebook / LinkedIn)</span></div>
+                            <div class="form-group mb-15">
+                                <label for="og-title" class="text-xs weight-bold text-muted uppercase mb-05">og:title</label>
+                                <input type="text" id="og-title" class="input" placeholder="Page title for social sharing">
+                            </div>
+                            <div class="form-group mb-15">
+                                <label for="og-desc" class="text-xs weight-bold text-muted uppercase mb-05">og:description</label>
+                                <textarea id="og-desc" class="input" rows="3" placeholder="Description shown in social previews..." style="resize: vertical;"></textarea>
+                            </div>
+                            <div class="form-group mb-15">
+                                <label for="og-image" class="text-xs weight-bold text-muted uppercase mb-05">og:image URL <span class="text-muted" style="font-weight:400;">(1200×630 recommended)</span></label>
+                                <input type="url" id="og-image" class="input" placeholder="https://example.com/image.jpg">
+                            </div>
+                            <div class="form-group mb-15">
+                                <label for="og-url" class="text-xs weight-bold text-muted uppercase mb-05">og:url</label>
+                                <input type="url" id="og-url" class="input" placeholder="https://example.com/page">
+                            </div>
+                            <div class="form-group mb-15">
+                                <label for="og-type" class="text-xs weight-bold text-muted uppercase mb-05">og:type</label>
+                                <select id="og-type" class="input" style="cursor:pointer;">
+                                    <option value="website">website</option>
+                                    <option value="article">article</option>
+                                    <option value="product">product</option>
+                                    <option value="profile">profile</option>
+                                    <option value="video.movie">video.movie</option>
+                                    <option value="music.song">music.song</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="og-sitename" class="text-xs weight-bold text-muted uppercase mb-05">og:site_name</label>
+                                <input type="text" id="og-sitename" class="input" placeholder="Your Website Name">
+                            </div>
+                        </div>
+
+                        <!-- TWITTER TAB -->
+                        <div id="tab-twitter" class="tab-panel" style="display:none;">
+                            <div class="editor-panel-title mb-15"><span>Twitter / X Card</span></div>
+                            <div class="form-group mb-15">
+                                <label for="tw-card" class="text-xs weight-bold text-muted uppercase mb-05">twitter:card</label>
+                                <select id="tw-card" class="input" style="cursor:pointer;">
+                                    <option value="summary_large_image">summary_large_image (Large image)</option>
+                                    <option value="summary">summary (Small image)</option>
+                                    <option value="app">app</option>
+                                    <option value="player">player</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-15">
+                                <label for="tw-title" class="text-xs weight-bold text-muted uppercase mb-05">twitter:title</label>
+                                <input type="text" id="tw-title" class="input" placeholder="Title for Twitter card">
+                            </div>
+                            <div class="form-group mb-15">
+                                <label for="tw-desc" class="text-xs weight-bold text-muted uppercase mb-05">twitter:description</label>
+                                <textarea id="tw-desc" class="input" rows="3" placeholder="Description for Twitter card..." style="resize: vertical;"></textarea>
+                            </div>
+                            <div class="form-group mb-15">
+                                <label for="tw-image" class="text-xs weight-bold text-muted uppercase mb-05">twitter:image</label>
+                                <input type="url" id="tw-image" class="input" placeholder="https://example.com/image.jpg">
+                            </div>
+                            <div class="form-group">
+                                <label for="tw-site" class="text-xs weight-bold text-muted uppercase mb-05">twitter:site <span class="text-muted" style="font-weight:400;">(@handle)</span></label>
+                                <input type="text" id="tw-site" class="input" placeholder="@yourbrand">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Live output preview -->
+                    <div class="flex flex-col gap-15">
+                        <div class="editor-panel-title"><span>Generated Meta Tags</span></div>
+                        <textarea id="output-meta" class="textarea" readonly style="flex: 1; min-height: 340px; font-family: var(--font-mono); font-size: var(--text-xs); line-height: 1.7; background: var(--bg-input); color: var(--text-main); resize: none;" placeholder="Fill in the fields to generate meta tags..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Actions Bar -->
+                <div class="actions-bar">
+                    <button class="btn btn-ghost" id="tool-reset">Reset</button>
+                    <button class="btn btn-secondary" id="btn-download-meta">Download .txt</button>
+                    <button class="btn btn-primary" id="btn-copy-meta">Copy Tags</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEO Sections Placeholder -->
+        <div id="ph-seo"></div>
+        <!-- Related Utilities Grid Placeholder -->
+        <div id="ph-related"></div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer style="margin-top: var(--spacing-12); padding: var(--spacing-6) 0 var(--spacing-4) 0; border-top: 1px solid var(--border-color); background: var(--bg-card); text-align: left;">
+        <div class="container container-xl">
+            <div class="grid grid-cols-1 grid-md-2 grid-lg-4 gap-4 mb-6">
+                <div>
+                    <h5 class="title-5 mb-1" style="font-weight: var(--weight-extrabold);">ToolNest</h5>
+                    <p class="text-muted text-sm">Free browser-based utility tools centered around strict data privacy and responsive performance.</p>
+                </div>
+                <div>
+                    <h6 class="title-6 mb-1">Categories</h6>
+                    <ul style="list-style: none;" class="flex flex-col gap-05">
+                        <li><a href="../../index.html#categories" class="text-sm text-muted">PDF Suite</a></li>
+                        <li><a href="../../index.html#categories" class="text-sm text-muted">Image Converters</a></li>
+                        <li><a href="../../index.html#categories" class="text-sm text-muted">Text Tools</a></li>
+                        <li><a href="../../index.html#categories" class="text-sm text-muted">Developer Utilities</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h6 class="title-6 mb-1">Navigation</h6>
+                    <ul style="list-style: none;" class="flex flex-col gap-05">
+                        <li><a href="../../design-system.html" class="text-sm text-muted">Design System</a></li>
+                        <li><a href="../../index.html" class="text-sm text-muted">Homepage</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h6 class="title-6 mb-1">Privacy Guarantee</h6>
+                    <p class="text-sm text-muted">No cloud server interaction. Files remain local inside browser runtime memory blocks.</p>
+                </div>
+            </div>
+            <hr style="border: 0; border-top: 1px solid var(--border-color); margin-bottom: var(--spacing-3);">
+            <div class="text-center"><p class="footer-credit" style="text-align: center;">
+                    © 2026 TOOLNEST — Made with <span style="color:#e25555;">&#10084;&#65039;</span> by
+                    <a class="text-gradient" href="https://ahsan-weha.vercel.app" target="_blank"
+                        rel="noopener noreferrer">
+                        Ahsan Weha
+                    </a>
+                </p></div>
+        </div>
+    </footer>
+
+    <button id="back-to-top" aria-label="Back to top">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 15l7-7 7 7"/></svg>
+    </button>
+    <div id="tn-toast-container"></div>
+    <div id="tn-modal-root"></div>
+
+    <script src="../../js/design-system.js"></script>
+    <script src="../../js/app.js"></script>
+    <script src="../placeholder.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

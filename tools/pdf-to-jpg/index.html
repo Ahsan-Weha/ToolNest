@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert each PDF page to a high-quality JPG or PNG image. Free, private, offline.">
+    <title>PDF to JPG Converter — Free & Offline | ToolNest</title>
+    <link rel="stylesheet" href="../../css/design-system.css">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../template.css">
+    <style>
+        .faq-trigger{width:100%;padding:var(--spacing-2) var(--spacing-3);display:flex;justify-content:space-between;align-items:center;cursor:pointer;text-align:left;background:none;border:none;}
+        .faq-question{font-size:var(--text-base);font-weight:var(--weight-bold);color:var(--text-main);}
+        .faq-icon-svg{width:1.25rem;height:1.25rem;fill:none;stroke:currentColor;stroke-width:2px;stroke-linecap:round;stroke-linejoin:round;transition:transform var(--transition-normal);color:var(--text-muted);}
+        .faq-content{max-height:0;overflow:hidden;padding:0 var(--spacing-3);transition:max-height var(--transition-normal) ease-out;}
+        .faq-answer{padding-bottom:var(--spacing-2);font-size:var(--text-sm);color:var(--text-muted);line-height:var(--lh-relaxed);}
+        .faq-accordion{border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-card);overflow:hidden;transition:border-color var(--transition-normal),box-shadow var(--transition-normal);margin-bottom:var(--spacing-15);}
+        .faq-accordion:hover{border-color:var(--border-color-hover);}
+        .faq-accordion.active{border-color:var(--primary);box-shadow:0 4px 15px -3px var(--primary-glow);}
+        .faq-accordion.active .faq-icon-svg{transform:rotate(180deg);color:var(--primary);}
+        .faq-accordion.active .faq-content{max-height:300px;}
+        .tool-loading-overlay{position:absolute;inset:0;background:var(--glass-bg);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;border-radius:var(--radius-lg);z-index:10;}
+        .loader-ring{width:40px;height:40px;border:3px solid var(--border-color);border-top-color:var(--primary);border-radius:50%;animation:spin 0.7s linear infinite;}
+        @keyframes spin{to{transform:rotate(360deg)}}
+        .file-item{display:flex;align-items:center;gap:var(--spacing-1);background:var(--bg-input);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:var(--spacing-1) var(--spacing-15);margin-bottom:4px;}
+        .file-item-name{flex:1;font-size:var(--text-sm);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+        .file-item-size{font-size:var(--text-xs);color:var(--text-muted);flex-shrink:0;}
+        .file-item-btn{background:none;border:none;cursor:pointer;color:var(--text-muted);padding:2px;border-radius:var(--radius-sm);transition:color var(--transition-fast);}
+        .file-item-btn:hover{color:var(--error);}
+        .page-rot-item{display:flex;align-items:center;gap:var(--spacing-1);flex-wrap:wrap;background:var(--bg-input);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:var(--spacing-1) var(--spacing-15);margin-bottom:var(--spacing-1);}
+        .page-check-cell{display:flex;flex-direction:column;align-items:center;cursor:pointer;position:relative;user-select:none;width:80px;}
+        .page-check-thumb{width:70px;height:90px;border:2px solid var(--border-color);border-radius:var(--radius-sm);overflow:hidden;position:relative;transition:border-color var(--transition-fast);}
+        .page-check-cell.selected .page-check-thumb{border-color:var(--error);opacity:.7;}
+        .page-check-overlay{position:absolute;inset:0;background:rgba(239,68,68,.3);display:flex;align-items:center;justify-content:center;}
+        #removepg-page-grid{display:flex;flex-wrap:wrap;gap:var(--spacing-1);margin-top:var(--spacing-2);}
+        .watermark-preview{background:var(--bg-input);border:2px dashed var(--border-color);border-radius:var(--radius-md);height:160px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin:var(--spacing-2) 0;}
+    </style>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PDF to JPG Converter — Free & Offline | ToolNest">
+    <meta property="og:description" content="Convert each PDF page to a high-quality JPG or PNG image. Free, private, offline.">
+    <meta property="og:site_name" content="ToolNest">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="PDF to JPG Converter — Free & Offline | ToolNest">
+    <meta name="twitter:description" content="Convert each PDF page to a high-quality JPG or PNG image. Free, private, offline.">
+</head>
+<body data-tool-id="pdf-to-jpg">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay" aria-hidden="true"></div>
+    <div id="mobile-drawer" class="mobile-drawer" role="dialog" aria-label="Navigation menu">
+        <div class="mobile-drawer-header"><a href="../../index.html" class="flex items-center gap-1"><div class="icon-wrapper" style="background:var(--gradient-brand);width:2rem;height:2rem;border-radius:var(--radius-sm)"><svg class="icon" style="color:white;width:1em;height:1em" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg></div><span class="text-gradient" style="font-weight:var(--weight-extrabold);font-family:var(--font-display);font-size:var(--text-lg)">ToolNest</span></a><button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
+        <nav class="mobile-drawer-body"><a href="../../index.html" class="mobile-nav-link">Homepage</a><a href="../../index.html#categories" class="mobile-nav-link">All Tools</a></nav>
+        <div class="mobile-drawer-footer"><button data-theme-toggle class="btn btn-glass" style="width:100%"><svg class="icon theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><svg class="icon theme-icon-moon" style="display:none" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><span class="theme-text-label">Light Mode</span></button></div>
+    </div>
+    <div id="search-overlay" role="dialog" aria-label="Search tools" aria-modal="true"><div class="search-overlay-box"><div class="search-overlay-input-row"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color:var(--text-muted);flex-shrink:0"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><input id="overlay-search-input" type="text" placeholder="Search all tools" autocomplete="off"><button id="search-overlay-close" class="search-overlay-close">ESC</button></div><div id="overlay-search-results" class="search-overlay-results"></div></div></div>
+    <nav class="main-nav" style="position:sticky;top:0;z-index:100;background:var(--glass-bg);border-bottom:1px solid var(--glass-border);backdrop-filter:var(--glass-backdrop);-webkit-backdrop-filter:var(--glass-backdrop);padding:var(--spacing-15) 0;">
+        <div class="container container-xl flex justify-between items-center">
+            <a href="../../index.html" class="flex items-center gap-1"><div class="icon-wrapper" style="background:var(--gradient-brand);width:2.2rem;height:2.2rem;border-radius:var(--radius-sm)"><svg class="icon" style="color:white;width:1.1em;height:1.1em" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg></div><span class="title-3 text-gradient" style="font-weight:var(--weight-extrabold);letter-spacing:-0.02em">ToolNest</span></a>
+            <div class="flex items-center gap-1"><a href="../../index.html#categories" class="btn btn-ghost btn-sm nav-links-desktop">All Tools</a><button class="nav-search-trigger" data-search-open aria-label="Search"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><span>Search</span></button><button data-theme-toggle class="btn btn-glass btn-sm" aria-label="Toggle theme"><svg class="icon theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><svg class="icon theme-icon-moon" style="display:none" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></button><button id="hamburger-btn" class="hamburger-btn" aria-label="Open menu"><span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span></button></div>
+        </div>
+    </nav>
+    <main id="main-content" class="container container-xl py-4">
+        <div class="breadcrumbs"><a href="../../index.html">Home</a><span class="breadcrumbs-separator">&rsaquo;</span><a href="../../index.html#categories">PDF Tools</a><span class="breadcrumbs-separator">&rsaquo;</span><span style="color:var(--text-main);font-weight:var(--weight-semibold)">PDF to JPG</span></div>
+        <section class="mb-4 anim-fade-in">
+            <div class="flex items-start justify-between gap-2 flex-wrap">
+                <div class="flex flex-col gap-1"><div class="flex items-center gap-1 flex-wrap"><span class="badge badge-success">Offline</span><span class="badge badge-primary">Free Forever</span></div><h1 class="title-1">PDF to JPG Converter</h1><p class="text-muted text-lg" style="max-width:680px;line-height:var(--lh-relaxed)">Extract every page of your PDF as a high-quality image. Download all pages as a ZIP archive — no uploads ever.</p></div>
+                <button class="favorite-btn" data-fav-id="pdf-to-jpg" aria-label="Add to favorites"><svg class="fav-icon-fill" width="16" height="16" viewBox="0 0 24 24" fill="#f43f5e" stroke="#f43f5e"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg><svg class="fav-icon-outline" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+            </div>
+        </section>
+        <section class="tool-container mb-8" id="tool-interface">
+            <div class="tool-interface-card card-glass" style="position:relative"><div id="pdftojpg-dropzone" class="dropzone"><input type="file" id="pdftojpg-input" class="file-input-hidden" accept=".pdf" ><div class="dropzone-icon"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></div><div><h4 class="title-4 mb-05">Drop your PDF here</h4><p class="text-muted text-sm">or click to browse &middot; processed locally</p></div></div><div id="pdftojpg-file-info" class="card mt-2" style="display:none;padding:var(--spacing-2);border-color:var(--primary)">
+        <div class="flex items-center gap-15 mb-2"><div class="icon-wrapper" style="background:var(--primary-glow);border-radius:var(--radius-sm)"><svg class="icon text-gradient" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div><div><div id="pdftojpg-filename" class="weight-semibold text-sm">file.pdf</div><div id="pdftojpg-filesize" class="text-xs text-muted"></div></div></div>
+        <div class="flex gap-2 flex-wrap"><div class="form-group" style="min-width:160px"><label class="text-xs text-muted" for="dpi-select">DPI / Scale</label><select id="dpi-select" class="input" style="margin-top:4px"><option value="1.5">150 DPI (Standard)</option><option value="2">200 DPI</option><option value="2.8">280 DPI (High)</option></select></div><div class="form-group" style="min-width:140px"><label class="text-xs text-muted" for="format-select">Format</label><select id="format-select" class="input" style="margin-top:4px"><option value="jpeg">JPG</option><option value="png">PNG</option></select></div></div>
+        <div id="pdftojpg-result-info" class="text-sm text-muted mt-1"></div>
+    </div><div id="progress-container" class="progress-container"><div id="progress-bar" class="progress-bar"></div></div><div id="pdftojpg-success" class="alert alert-success mt-2" style="display:none"><svg class="icon icon-lg flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><div><div class="alert-title">Conversion Complete! ZIP is downloading.</div><div id="pdftojpg-success-info"></div></div></div><div class="actions-bar"><button class="btn btn-secondary btn-sm" id="pdftojpg-clear">Clear</button><button class="btn btn-primary" id="pdftojpg-btn" disabled><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Convert to Images</button></div>
+                <div class="tool-loading-overlay" id="tool-loader"><div class="loader-ring"></div></div>
+            </div>
+        </section><section class="tool-details-section" style="border-top:1px solid var(--border-color);padding-top:var(--spacing-8)"><h2 class="title-3 mb-3">Related PDF Tools</h2><div class="grid grid-cols-1 grid-md-3 gap-3"><a href="../pdf-compressor/index.html" class="card card-interactive"><div class="card-header" style="margin-bottom:var(--spacing-1)"><div class="icon-wrapper" style="background:var(--primary-glow);border-radius:var(--radius-md)"><svg class="icon text-gradient" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div></div><h4 class="title-4 mb-1">PDF Compressor</h4><p class="text-muted text-sm">Shrink your PDF.</p></a><a href="../jpg-to-pdf/index.html" class="card card-interactive"><div class="card-header" style="margin-bottom:var(--spacing-1)"><div class="icon-wrapper" style="background:var(--primary-glow);border-radius:var(--radius-md)"><svg class="icon text-gradient" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 4v16m8-8H4"/></svg></div></div><h4 class="title-4 mb-1">JPG to PDF</h4><p class="text-muted text-sm">Turn images into PDF.</p></a><a href="../merge-pdf/index.html" class="card card-interactive"><div class="card-header" style="margin-bottom:var(--spacing-1)"><div class="icon-wrapper" style="background:var(--primary-glow);border-radius:var(--radius-md)"><svg class="icon text-gradient" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 7v12m0-12l-4 4m4-4l4 4m0 6v7m0-7l-4 4m4-4l4 4"/></svg></div></div><h4 class="title-4 mb-1">Merge PDF</h4><p class="text-muted text-sm">Combine multiple PDFs.</p></a></div></section>
+    </main>
+    <footer style="margin-top:var(--spacing-12);padding:var(--spacing-6) 0 var(--spacing-4);border-top:1px solid var(--border-color);background:var(--bg-card)"><div class="container container-xl"><div class="text-center"><p class="footer-credit" style="text-align: center;">
+                    © 2026 TOOLNEST — Made with <span style="color:#e25555;">&#10084;&#65039;</span> by
+                    <a class="text-gradient" href="https://ahsan-weha.vercel.app" target="_blank"
+                        rel="noopener noreferrer">
+                        Ahsan Weha
+                    </a>
+                </p></div></div></footer>
+    <button id="back-to-top" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 15l7-7 7 7"/></svg></button>
+    <div id="tn-toast-container"></div><div id="tn-modal-root"></div>
+    <script src="../../js/design-system.js"></script>
+    <script src="../../js/app.js"></script>
+    <script src="../../js/pdf-utils.js"></script>
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

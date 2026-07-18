@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" id="meta-desc" content="Free offline tools on ToolNest. Built entirely using client-side code for ultimate speed and privacy.">
+    <title>PNG to JPG - ToolNest</title>
+    <!-- Core and specific stylesheets -->
+    <link rel="stylesheet" href="../../css/design-system.css">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../template.css">
+    <link rel="stylesheet" href="../image-resizer/style.css">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PNG to JPG - ToolNest">
+    <meta property="og:description" content="Free offline tools on ToolNest. Built entirely using client-side code for ultimate speed and privacy.">
+    <meta property="og:site_name" content="ToolNest">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="PNG to JPG - ToolNest">
+    <meta name="twitter:description" content="Free offline tools on ToolNest. Built entirely using client-side code for ultimate speed and privacy.">
+</head>
+<body data-tool-id="png-to-jpg">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Mobile Drawer Navigation -->
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay" aria-hidden="true"></div>
+    <div id="mobile-drawer" class="mobile-drawer" role="dialog" aria-label="Navigation menu">
+        <div class="mobile-drawer-header">
+            <a href="../../index.html" class="flex items-center gap-1">
+                <div class="icon-wrapper" style="background:var(--gradient-brand);width:2rem;height:2rem;border-radius:var(--radius-sm)">
+                    <svg class="icon" style="color:white;width:1em;height:1em" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                </div>
+                <span class="text-gradient" style="font-weight:var(--weight-extrabold);font-family:var(--font-display);font-size:var(--text-lg)">ToolNest</span>
+            </a>
+            <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Close menu">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <nav class="mobile-drawer-body">
+            <a href="../../index.html" class="mobile-nav-link">Homepage</a>
+            <a href="../../index.html#categories" class="mobile-nav-link">All Tools</a>
+        </nav>
+        <div class="mobile-drawer-footer">
+            <button data-theme-toggle class="btn btn-glass" style="width:100%">
+                <span class="theme-text-label">Light Mode</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Search Overlay -->
+    <div id="search-overlay" role="dialog" aria-label="Search tools" aria-modal="true">
+        <div class="search-overlay-box">
+            <div class="search-overlay-input-row">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color:var(--text-muted);flex-shrink:0"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <input id="overlay-search-input" type="text" placeholder="Search all tools…" autocomplete="off">
+                <button id="search-overlay-close" class="search-overlay-close">ESC</button>
+            </div>
+            <div id="overlay-search-results" class="search-overlay-results"></div>
+        </div>
+    </div>
+
+    <!-- Sticky Navigation Header -->
+    <nav class="main-nav" style="position: sticky; top: 0; z-index: 100; background: var(--glass-bg); border-bottom: 1px solid var(--glass-border); backdrop-filter: var(--glass-backdrop); -webkit-backdrop-filter: var(--glass-backdrop); padding: var(--spacing-15) 0;">
+        <div class="container container-xl flex justify-between items-center">
+            <a href="../../index.html" class="flex items-center gap-1">
+                <div class="icon-wrapper" style="background:var(--gradient-brand);width:2.2rem;height:2.2rem;border-radius:var(--radius-sm)">
+                    <svg class="icon" style="color:white;width:1.1em;height:1.1em" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                </div>
+                <span class="title-3 text-gradient" style="font-weight:var(--weight-extrabold);letter-spacing:-0.02em">ToolNest</span>
+            </a>
+            <div class="flex items-center gap-1">
+                <a href="../../index.html#categories" class="btn btn-ghost btn-sm nav-links-desktop">All Tools</a>
+                <button class="nav-search-trigger" data-search-open aria-label="Search (Ctrl+K)">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    <span>Search</span>
+                </button>
+                <button data-theme-toggle class="btn btn-glass btn-sm" aria-label="Toggle theme">
+                    <svg class="icon theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                </button>
+                <button id="hamburger-btn" class="hamburger-btn" aria-label="Open menu">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Workspace -->
+    <!-- Accessibility H1 -->
+    <h1 class="sr-only">PNG to JPG Converter</h1>
+    <main id="main-content" class="container container-xl py-4">
+        
+        <!-- Breadcrumbs Placeholder -->
+        <div id="ph-breadcrumbs"></div>
+
+        <!-- Tool Page Hero Placeholder -->
+        <div id="ph-hero"></div>
+
+        <!-- Tool Interface Panel -->
+        <section class="tool-container mb-8" id="tool-interface" style="position:relative;">
+            <div class="tool-interface-card card-glass">
+
+                <!-- Dropzone Image Selector -->
+                <div id="file-dropzone" class="dropzone mb-3">
+                    <input type="file" id="file-input" class="file-input-hidden" accept="image/png">
+                    <div class="dropzone-icon">
+                        <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    </div>
+                    <div>
+                        <h4 class="title-4 mb-05">Drop your PNG image here</h4>
+                        <p class="text-muted text-sm">or click to browse local files (Accepts PNG)</p>
+                    </div>
+                </div>
+
+                <!-- Selected file metadata details -->
+                <div id="selected-file-details" class="card mb-3" style="display:none; padding:var(--spacing-2); border-color:var(--primary);">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-15">
+                            <div class="icon-wrapper" style="background-color: var(--primary-glow); border-radius: var(--radius-sm)">
+                                <svg class="icon text-gradient" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            </div>
+                            <div>
+                                <div class="file-name weight-semibold text-main">logo.png</div>
+                                <div class="file-size text-xs text-muted">0 KB</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-ghost btn-sm text-danger" id="tool-reset" aria-label="Remove Image">
+                            <svg class="icon" style="color:var(--error)" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Canvas Preview Stage Grid (Initially Hidden) -->
+                <div id="image-preview-section" style="display: none;" class="mb-3">
+                    <div class="preview-stage mb-2">
+                        <!-- Left: Original View -->
+                        <div class="preview-box">
+                            <div class="info-display-row">
+                                <span>Original PNG (Transparent)</span>
+                                <span id="original-size-display">Weight calculations...</span>
+                            </div>
+                            <div class="preview-canvas-wrapper transparency-grid">
+                                <canvas id="canvas-original" class="preview-canvas"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Right: Output View -->
+                        <div class="preview-box">
+                            <div class="info-display-row">
+                                <span>Converted JPG (Solid Background)</span>
+                                <span id="processed-size-display">Weight calculations...</span>
+                            </div>
+                            <div class="preview-canvas-wrapper">
+                                <canvas id="canvas-processed" class="preview-canvas"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <div id="converter-controls" style="display:none;">
+                    <div class="grid grid-cols-1 grid-sm-2 gap-2 mb-3">
+                        <!-- Background Color Picker -->
+                        <div class="form-group">
+                            <label for="bg-color" class="label">JPG Background Fill Color</label>
+                            <div class="flex items-center gap-1" style="margin-top: 4px;">
+                                <input type="color" id="bg-color" class="input" style="padding: 2px; width: 44px; height: 38px; cursor: pointer;" value="#ffffff">
+                                <span id="color-hex-val" style="font-family: monospace; font-size: var(--text-sm)">#ffffff</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Compression Quality Slider -->
+                        <div class="form-group">
+                            <div class="flex justify-between items-center label">
+                                <span>JPG Compression Quality</span>
+                                <span id="export-quality-val" class="range-val">90%</span>
+                            </div>
+                            <div class="range-slider-group">
+                                <input type="range" id="export-quality" class="range-slider" min="10" max="100" value="90">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Actions row -->
+                    <div class="actions-bar">
+                        <button class="btn btn-secondary btn-sm" id="clear-btn">Clear All</button>
+                        <button class="btn btn-success" id="download-image-btn">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                            Download JPG Image
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Loading Spinner overlay -->
+                <div class="tool-loading-overlay" id="tool-loader">
+                    <div class="loader-ring"></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SEO Sections Placeholder -->
+        <div id="ph-seo"></div>
+
+        <!-- Related Utilities Grid Placeholder -->
+        <div id="ph-related"></div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer style="margin-top: var(--spacing-12); padding: var(--spacing-6) 0 var(--spacing-4) 0; border-top: 1px solid var(--border-color); background: var(--bg-card); text-align: left;">
+        <div class="container container-xl">
+            <div class="text-center">
+                <p class="footer-credit" style="text-align: center;">
+                    © 2026 TOOLNEST — Made with <span style="color:#e25555;">&#10084;&#65039;</span> by
+                    <a class="text-gradient" href="https://ahsan-weha.vercel.app" target="_blank"
+                        rel="noopener noreferrer">
+                        Ahsan Weha
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" aria-label="Back to top">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 15l7-7 7 7"/></svg>
+    </button>
+
+    <!-- Toast stack -->
+    <div id="tn-toast-container"></div>
+    <div id="tn-modal-root"></div>
+
+    <!-- Core scripts followed by placeholder then main tool controller -->
+    <script src="../../js/design-system.js"></script>
+    <script src="../../js/app.js"></script>
+    <script src="../placeholder.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

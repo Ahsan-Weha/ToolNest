@@ -1,0 +1,251 @@
+@import url('design-system.css');
+
+/* ==========================================================================
+   HOMEPAGE CUSTOM COMPONENT STYLES
+   ========================================================================= */
+
+/* Hero glow effect */
+.hero-glow-container {
+    position: relative;
+    overflow: hidden;
+    padding: var(--spacing-10) 0 var(--spacing-10) 0;
+}
+
+.hero-glow-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Autocomplete Search Dropdown styling */
+.search-container {
+    position: relative;
+    max-width: 580px;
+    width: 100%;
+    z-index: 40;
+}
+
+.search-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.search-icon-left {
+    position: absolute;
+    left: var(--spacing-2);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+.search-container .input {
+    padding-left: var(--spacing-5);
+    padding-right: var(--spacing-4);
+    font-size: var(--text-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.search-container .input:focus {
+    box-shadow: 0 0 0 5px var(--primary-glow);
+}
+
+.search-results-dropdown {
+    position: absolute;
+    top: 105%;
+    left: 0;
+    right: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xl);
+    max-height: 320px;
+    overflow-y: auto;
+    display: none;
+    z-index: 100;
+}
+
+.search-results-dropdown.active {
+    display: block;
+}
+
+.search-result-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-15);
+    padding: var(--spacing-15) var(--spacing-2);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color var(--transition-fast);
+    cursor: pointer;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item:hover, .search-result-item:focus {
+    background-color: var(--bg-card-hover);
+    outline: none;
+}
+
+.search-result-item .icon-wrapper {
+    width: 2.2rem;
+    height: 2.2rem;
+    background-color: var(--border-color);
+}
+
+.search-result-title {
+    font-weight: var(--weight-bold);
+    color: var(--text-main);
+    font-size: var(--text-base);
+}
+
+.search-result-desc {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.search-no-results {
+    padding: var(--spacing-3);
+    text-align: center;
+    color: var(--text-muted);
+}
+
+/* Category grid and chips */
+.category-chips-scroll {
+    display: flex;
+    gap: var(--spacing-1);
+    overflow-x: auto;
+    padding-bottom: var(--spacing-1);
+    scrollbar-width: none; /* Hide scrollbar for clean chip feel */
+}
+.category-chips-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.category-chip {
+    padding: var(--spacing-1) var(--spacing-25);
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border-color);
+    font-weight: var(--weight-semibold);
+    color: var(--text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    background-color: var(--bg-card);
+    transition: all var(--transition-fast);
+}
+
+.category-chip:hover {
+    color: var(--text-main);
+    border-color: var(--border-color-hover);
+}
+
+.category-chip.active {
+    background: var(--gradient-brand);
+    color: var(--text-inverse) !important;
+    border-color: transparent;
+}
+
+/* FAQ Collapsible accordion styling */
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-accordion {
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background-color: var(--bg-card);
+    overflow: hidden;
+    transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.faq-accordion:hover {
+    border-color: var(--border-color-hover);
+}
+
+.faq-trigger {
+    width: 100%;
+    padding: var(--spacing-25) var(--spacing-3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    text-align: left;
+    background: none;
+    border: none;
+}
+
+.faq-trigger:focus-visible {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.faq-question {
+    font-size: var(--text-base);
+    font-weight: var(--weight-bold);
+    color: var(--text-main);
+}
+
+.faq-icon-svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform var(--transition-normal);
+    color: var(--text-muted);
+}
+
+.faq-content {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 var(--spacing-3);
+    transition: max-height var(--transition-normal) ease-out, padding var(--transition-normal) ease-out;
+}
+
+.faq-answer {
+    padding-bottom: var(--spacing-2);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    line-height: var(--lh-relaxed);
+}
+
+/* Active State for FAQ */
+.faq-accordion.active {
+    border-color: var(--primary);
+    box-shadow: 0 4px 15px -3px var(--primary-glow);
+}
+
+.faq-accordion.active .faq-icon-svg {
+    transform: rotate(180deg);
+    color: var(--primary);
+}
+
+.faq-accordion.active .faq-content {
+    max-height: 500px; /* Safe upper limit for content */
+}
+
+/* Sticky Header styling */
+.main-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--glass-bg);
+    border-bottom: 1px solid var(--glass-border);
+    backdrop-filter: var(--glass-backdrop);
+    -webkit-backdrop-filter: var(--glass-backdrop);
+    padding: var(--spacing-15) 0;
+}

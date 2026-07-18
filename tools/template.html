@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Reusable tool page template for ToolNest — offline browser utilities built for speed and privacy.">
+    <title>Tool Template - ToolNest</title>
+    <link rel="stylesheet" href="../css/design-system.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="template.css">
+    <style>
+        /* Tool page specific nav overrides use the same .main-nav class */
+        .main-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--glass-bg);
+            border-bottom: 1px solid var(--glass-border);
+            backdrop-filter: var(--glass-backdrop);
+            -webkit-backdrop-filter: var(--glass-backdrop);
+            padding: var(--spacing-15) 0;
+        }
+        /* FAQ reuse from homepage */
+        .faq-trigger {
+            width:100%;padding:var(--spacing-2) var(--spacing-3);
+            display:flex;justify-content:space-between;align-items:center;
+            cursor:pointer;text-align:left;background:none;border:none;
+        }
+        .faq-question { font-size:var(--text-base);font-weight:var(--weight-bold);color:var(--text-main); }
+        .faq-icon-svg { width:1.25rem;height:1.25rem;fill:none;stroke:currentColor;stroke-width:2px;stroke-linecap:round;stroke-linejoin:round;transition:transform var(--transition-normal);color:var(--text-muted); }
+        .faq-content { max-height:0;overflow:hidden;padding:0 var(--spacing-3);transition:max-height var(--transition-normal) ease-out; }
+        .faq-answer { padding-bottom:var(--spacing-2);font-size:var(--text-sm);color:var(--text-muted);line-height:var(--lh-relaxed); }
+        .faq-accordion { border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-card);overflow:hidden;transition:border-color var(--transition-normal),box-shadow var(--transition-normal);margin-bottom:var(--spacing-15); }
+        .faq-accordion:hover { border-color:var(--border-color-hover); }
+        .faq-accordion.active { border-color:var(--primary);box-shadow:0 4px 15px -3px var(--primary-glow); }
+        .faq-accordion.active .faq-icon-svg { transform:rotate(180deg);color:var(--primary); }
+        .faq-accordion.active .faq-content { max-height:250px; }
+    </style>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Tool Template - ToolNest">
+    <meta property="og:description" content="Reusable tool page template for ToolNest — offline browser utilities built for speed and privacy.">
+    <meta property="og:site_name" content="ToolNest">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Tool Template - ToolNest">
+    <meta name="twitter:description" content="Reusable tool page template for ToolNest — offline browser utilities built for speed and privacy.">
+</head>
+<!-- data-tool-id tells app.js to auto-track this visit in recently-used history -->
+<body data-tool-id="REPLACE_WITH_TOOL_ID">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- =====================================================================
+         MOBILE MENU OVERLAY & DRAWER (same as homepage)
+    ====================================================================== -->
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay" aria-hidden="true"></div>
+
+    <div id="mobile-drawer" class="mobile-drawer" role="dialog" aria-label="Navigation menu">
+        <div class="mobile-drawer-header">
+            <a href="../index.html" class="flex items-center gap-1">
+                <div class="icon-wrapper" style="background:var(--gradient-brand);width:2rem;height:2rem;border-radius:var(--radius-sm)">
+                    <svg class="icon" style="color:white;width:1em;height:1em" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                </div>
+                <span class="text-gradient" style="font-weight:var(--weight-extrabold);font-family:var(--font-display);font-size:var(--text-lg)">ToolNest</span>
+            </a>
+            <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Close menu">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <nav class="mobile-drawer-body">
+            <a href="../index.html" class="mobile-nav-link">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                Homepage
+            </a>
+            <a href="../index.html#categories" class="mobile-nav-link">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+                All Tools
+            </a>
+            <div class="mobile-drawer-divider"></div>
+            <a href="../design-system.html" class="mobile-nav-link">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                Design System
+            </a>
+        </nav>
+        <div class="mobile-drawer-footer">
+            <button data-theme-toggle class="btn btn-glass" style="width:100%">
+                <svg class="icon theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                <svg class="icon theme-icon-moon" style="display:none" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                <span class="theme-text-label">Light Mode</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         FULL-SCREEN SEARCH OVERLAY
+    ====================================================================== -->
+    <div id="search-overlay" role="dialog" aria-label="Search tools" aria-modal="true">
+        <div class="search-overlay-box">
+            <div class="search-overlay-input-row">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color:var(--text-muted);flex-shrink:0"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <input id="overlay-search-input" type="text" placeholder="Search all tools…" autocomplete="off">
+                <button id="search-overlay-close" class="search-overlay-close">ESC</button>
+            </div>
+            <div id="overlay-search-results" class="search-overlay-results"></div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         STICKY NAVIGATION
+    ====================================================================== -->
+    <nav class="main-nav" aria-label="Main navigation">
+        <div class="container container-xl flex justify-between items-center">
+            <a href="../index.html" class="flex items-center gap-1">
+                <div class="icon-wrapper" style="background:var(--gradient-brand);width:2.2rem;height:2.2rem;border-radius:var(--radius-sm)">
+                    <svg class="icon" style="color:white;width:1.1em;height:1.1em" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                </div>
+                <span class="title-3 text-gradient" style="font-weight:var(--weight-extrabold);letter-spacing:-0.02em">ToolNest</span>
+            </a>
+
+            <div class="flex items-center gap-1">
+                <a href="../index.html#categories" class="btn btn-ghost btn-sm nav-links-desktop">All Tools</a>
+                <button class="nav-search-trigger" data-search-open aria-label="Search (Ctrl+K)">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    <span>Search</span>
+                    <kbd style="font-size:0.6rem;background:var(--border-color);padding:1px 5px;border-radius:4px;color:var(--text-muted)">⌘K</kbd>
+                </button>
+                <button data-theme-toggle class="btn btn-glass btn-sm" aria-label="Toggle theme">
+                    <svg class="icon theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <svg class="icon theme-icon-moon" style="display:none" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+                <button id="hamburger-btn" class="hamburger-btn" aria-label="Open menu">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- =====================================================================
+         MAIN CONTENT
+    ====================================================================== -->
+    <main id="main-content" class="container container-xl py-4">
+
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <a href="../index.html">Home</a>
+            <span class="breadcrumbs-separator">&rsaquo;</span>
+            <a href="../index.html#categories">All Tools</a>
+            <span class="breadcrumbs-separator">&rsaquo;</span>
+            <span style="color:var(--text-main);font-weight:var(--weight-semibold)">Tool Name</span>
+        </div>
+
+        <!-- 1. TOOL HERO -->
+        <section class="mb-4 anim-fade-in">
+            <div class="flex items-start justify-between gap-2 flex-wrap">
+                <div class="flex flex-col gap-1">
+                    <div class="flex items-center gap-1 flex-wrap">
+                        <span class="badge badge-success">Offline Enabled</span>
+                        <span class="badge badge-primary">Free Forever</span>
+                    </div>
+                    <h1 class="title-1">Tool Page Template</h1>
+                    <p class="text-muted text-lg" style="max-width:680px;line-height:var(--lh-relaxed)">
+                        Replace this with your tool's description. Keep it clear, accurate, and human-friendly for maximum SEO impact and user comprehension.
+                    </p>
+                </div>
+                <!-- Favorite button (data-fav-id must match tool id) -->
+                <button class="favorite-btn" data-fav-id="REPLACE_WITH_TOOL_ID" aria-label="Add to favorites" title="Save to favorites">
+                    <svg class="fav-icon-fill" width="16" height="16" viewBox="0 0 24 24" fill="#f43f5e" stroke="#f43f5e"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                    <svg class="fav-icon-outline" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- 2. TOOL INTERFACE PANEL (with loading overlay support) -->
+        <section class="tool-container mb-8" id="tool-interface">
+            <div class="tool-interface-card card-glass" style="position:relative">
+
+                <!-- Tab switcher -->
+                <div class="tabs mb-3">
+                    <button class="tab-item active" onclick="switchTab(this,'file-tab')">File Processing</button>
+                    <button class="tab-item" onclick="switchTab(this,'text-tab')">Text Processing</button>
+                </div>
+
+                <!-- TAB: File Upload -->
+                <div id="file-tab" class="tool-tab-panel">
+                    <div id="file-dropzone" class="dropzone">
+                        <input type="file" id="file-input" class="file-input-hidden" accept=".pdf,.png,.jpg,.jpeg,.json">
+                        <div class="dropzone-icon">
+                            <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="title-4 mb-05">Drop your file here</h4>
+                            <p class="text-muted text-sm">or click to browse · max 50MB · processed locally</p>
+                        </div>
+                    </div>
+
+                    <div id="selected-file-details" class="card mt-2" style="display:none;padding:var(--spacing-2);border-color:var(--primary)">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center gap-15">
+                                <div class="icon-wrapper" style="background:var(--primary-glow);border-radius:var(--radius-sm)">
+                                    <svg class="icon text-gradient" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                                </div>
+                                <div>
+                                    <div class="file-name weight-semibold">filename.pdf</div>
+                                    <div class="file-size text-xs text-muted">0 KB</div>
+                                </div>
+                            </div>
+                            <button class="btn btn-ghost btn-sm" id="tool-reset" aria-label="Remove file">
+                                <svg class="icon" style="color:var(--error)" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="progress-container" class="progress-container">
+                        <div id="progress-bar" class="progress-bar"></div>
+                    </div>
+
+                    <div id="conversion-success-alert" class="alert alert-success mt-2" style="display:none">
+                        <svg class="icon icon-lg flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <div><div class="alert-title">Processing Complete!</div>Your file is ready to download.</div>
+                    </div>
+
+                    <div class="actions-bar">
+                        <button class="btn btn-secondary btn-sm" onclick="document.getElementById('tool-reset').click()">Clear</button>
+                        <button class="btn btn-primary" onclick="TN.toast.success('File downloading…')">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                            Download
+                        </button>
+                    </div>
+                </div>
+
+                <!-- TAB: Text Processing -->
+                <div id="text-tab" class="tool-tab-panel" style="display:none">
+                    <div class="tool-split-view">
+                        <div class="form-group">
+                            <div class="editor-panel-title">
+                                <span>Input</span>
+                                <button class="btn btn-ghost btn-sm text-muted" onclick="document.getElementById('input-text').value=''">Clear</button>
+                            </div>
+                            <textarea id="input-text" class="textarea" placeholder="Paste your text here…" style="min-height:200px"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="editor-panel-title">
+                                <span>Output</span>
+                                <span class="badge badge-secondary">Ready</span>
+                            </div>
+                            <textarea id="output-text" class="textarea" readonly placeholder="Output appears here…" style="min-height:200px;background:var(--bg-main)"></textarea>
+                        </div>
+                    </div>
+                    <div class="actions-bar">
+                        <button class="btn btn-secondary" id="tool-copy">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                            Copy Output
+                        </button>
+                        <button class="btn btn-primary" onclick="
+                            const o = document.getElementById('output-text');
+                            const i = document.getElementById('input-text');
+                            o.value = i.value.toUpperCase();
+                            TN.toast.success('Converted to uppercase!')">
+                            Process
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Loading overlay (controlled by TN.loader) -->
+                <div class="tool-loading-overlay" id="tool-loader">
+                    <div class="loader-ring"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. INTRODUCTION -->
+        <section class="tool-details-section">
+            <h3 class="title-3">What does this tool do?</h3>
+            <p class="text-muted" style="line-height:var(--lh-relaxed)">
+                Write an original, human-friendly explanation of the tool's purpose here. Describe the input it accepts, the transformation it applies, and the output format it produces. Keep this between 80–150 words for ideal SEO length.
+            </p>
+        </section>
+
+        <!-- 4. HOW IT WORKS -->
+        <section class="tool-details-section">
+            <h3 class="title-3">How It Works</h3>
+            <div class="steps-grid">
+                <div class="step-card"><div class="step-number">01</div><h5 class="title-5">Upload or Paste</h5><p class="text-muted text-sm">Drag a file into the drop zone or paste raw text into the input panel.</p></div>
+                <div class="step-card"><div class="step-number">02</div><h5 class="title-5">Configure Options</h5><p class="text-muted text-sm">Adjust any settings or quality parameters available in the tool controls.</p></div>
+                <div class="step-card"><div class="step-number">03</div><h5 class="title-5">Download Result</h5><p class="text-muted text-sm">Click Download or Copy to retrieve the processed output instantly.</p></div>
+            </div>
+        </section>
+
+        <!-- 5. BENEFITS -->
+        <section class="tool-details-section">
+            <h3 class="title-3">Benefits of Browser-Based Processing</h3>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <svg class="icon benefit-icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    <div><h5 class="title-5 mb-05">Private & Secure</h5><p class="text-muted text-sm">Nothing leaves your device. Processing happens entirely in local browser memory.</p></div>
+                </div>
+                <div class="benefit-card">
+                    <svg class="icon benefit-icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    <div><h5 class="title-5 mb-05">No Wait Times</h5><p class="text-muted text-sm">No upload queues. Your device hardware runs the computation at full native speed.</p></div>
+                </div>
+                <div class="benefit-card">
+                    <svg class="icon benefit-icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                    <div><h5 class="title-5 mb-05">Works Offline</h5><p class="text-muted text-sm">Once loaded, this tool runs without any internet connection, anywhere, anytime.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. FAQs -->
+        <section class="tool-details-section">
+            <h3 class="title-3 text-center mb-3">Frequently Asked Questions</h3>
+            <div class="faq-list" style="max-width:780px;margin:0 auto">
+                <div class="faq-accordion">
+                    <button class="faq-trigger" aria-expanded="false">
+                        <span class="faq-question">What file types are supported?</span>
+                        <svg class="faq-icon-svg" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-content"><div class="faq-answer">Replace this with the actual accepted formats. E.g., PDF, PNG, JPG up to 50MB. Processing is handled client-side so limits depend on available device RAM.</div></div>
+                </div>
+                <div class="faq-accordion">
+                    <button class="faq-trigger" aria-expanded="false">
+                        <span class="faq-question">Is my data private?</span>
+                        <svg class="faq-icon-svg" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-content"><div class="faq-answer">Yes. All processing runs in your browser sandbox. No file content, text, or metadata is ever sent to any server or third party.</div></div>
+                </div>
+                <div class="faq-accordion">
+                    <button class="faq-trigger" aria-expanded="false">
+                        <span class="faq-question">Does this tool work on mobile?</span>
+                        <svg class="faq-icon-svg" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-content"><div class="faq-answer">Yes. The layout is fully responsive and tested on modern mobile browsers. For large file conversions, a desktop device is recommended for better RAM availability.</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. RELATED TOOLS -->
+        <section class="tool-details-section" style="border-top:1px solid var(--border-color);padding-top:var(--spacing-6)">
+            <h3 class="title-3 mb-3">Related Tools</h3>
+            <div class="grid grid-cols-1 grid-md-3 gap-2">
+                <a href="../index.html#categories" class="card card-interactive">
+                    <div class="card-header" style="margin-bottom:var(--spacing-1)">
+                        <div class="icon-wrapper" style="background:var(--primary-glow);border-radius:var(--radius-md)">
+                            <svg class="icon text-gradient" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        </div>
+                    </div>
+                    <h4 class="title-4 mb-1">PDF Compressor</h4>
+                    <p class="text-muted text-sm">Shrink PDFs without quality loss.</p>
+                </a>
+                <a href="../index.html#categories" class="card card-interactive">
+                    <div class="card-header" style="margin-bottom:var(--spacing-1)">
+                        <div class="icon-wrapper" style="background:var(--primary-glow);border-radius:var(--radius-md)">
+                            <svg class="icon text-gradient" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                        </div>
+                    </div>
+                    <h4 class="title-4 mb-1">JSON Formatter</h4>
+                    <p class="text-muted text-sm">Beautify and validate JSON instantly.</p>
+                </a>
+                <a href="../index.html#categories" class="card card-interactive">
+                    <div class="card-header" style="margin-bottom:var(--spacing-1)">
+                        <div class="icon-wrapper" style="background:var(--primary-glow);border-radius:var(--radius-md)">
+                            <svg class="icon text-gradient" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 0h-4m4 0l-5 5"/></svg>
+                        </div>
+                    </div>
+                    <h4 class="title-4 mb-1">Image Resizer</h4>
+                    <p class="text-muted text-sm">Scale images to any dimension.</p>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =====================================================================
+         FOOTER
+    ====================================================================== -->
+    <footer style="margin-top:var(--spacing-12);padding:var(--spacing-6) 0 var(--spacing-4);border-top:1px solid var(--border-color);background:var(--bg-card)">
+        <div class="container container-xl">
+            <div class="grid grid-cols-1 grid-md-2 grid-lg-4 gap-4 mb-4">
+                <div>
+                    <h5 class="title-5 mb-1" style="font-weight:var(--weight-extrabold)">ToolNest</h5>
+                    <p class="text-muted text-sm">Free browser tools built for speed, privacy, and offline reliability.</p>
+                </div>
+                <div>
+                    <h6 class="title-6 mb-1">Categories</h6>
+                    <ul style="list-style:none" class="flex flex-col gap-05">
+                        <li><a href="../index.html#categories" class="text-sm text-muted">PDF Tools</a></li>
+                        <li><a href="../index.html#categories" class="text-sm text-muted">Image Tools</a></li>
+                        <li><a href="../index.html#categories" class="text-sm text-muted">Developer Utils</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h6 class="title-6 mb-1">Resources</h6>
+                    <ul style="list-style:none" class="flex flex-col gap-05">
+                        <li><a href="../index.html" class="text-sm text-muted">Homepage</a></li>
+                        <li><a href="../design-system.html" class="text-sm text-muted">Design System</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h6 class="title-6 mb-1">Privacy</h6>
+                    <p class="text-sm text-muted">No server uploads. No tracking. Files are processed locally and discarded on close.</p>
+                </div>
+            </div>
+            <hr style="border:0;border-top:1px solid var(--border-color);margin-bottom:var(--spacing-3)">
+            <div class="text-center">
+                <p class="footer-credit" style="text-align: center;">
+                    © 2026 TOOLNEST — Made with <span style="color:#e25555;">&#10084;&#65039;</span> by
+                    <a class="text-gradient" href="https://ahsan-weha.vercel.app" target="_blank"
+                        rel="noopener noreferrer">
+                        Ahsan Weha
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button id="back-to-top" aria-label="Back to top">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 15l7-7 7 7"/></svg>
+    </button>
+
+    <!-- Toast container -->
+    <div id="tn-toast-container"></div>
+
+    <!-- Modal root -->
+    <div id="tn-modal-root"></div>
+
+    <!-- Single script import -->
+    <script src="../js/app.js"></script>
+    <script src="template.js"></script>
+    <script>
+        function switchTab(btn, tabId) {
+            btn.closest('.tabs').querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+            btn.closest('.tool-interface-card').querySelectorAll('.tool-tab-panel').forEach(p => p.style.display = 'none');
+            document.getElementById(tabId).style.display = 'block';
+        }
+
+        // Wire copy button
+        document.getElementById('tool-copy')?.addEventListener('click', () => {
+            const out = document.getElementById('output-text')?.value;
+            if (!out?.trim()) { TN.toast.warning('Output is empty'); return; }
+            TN.clipboard.copy(out, () => TN.toast.success('Copied to clipboard!'));
+        });
+    </script>
+</body>
+</html>

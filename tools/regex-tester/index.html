@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" id="meta-desc" content="Free offline tools on ToolNest. Built entirely using client-side code for ultimate speed and privacy.">
+    <title>Regex Tester - Test Regular Expressions | ToolNest</title>
+    <!-- Core and specific stylesheets -->
+    <link rel="stylesheet" href="../../css/design-system.css">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../template.css">
+    <style>
+        /* FAQ accordion styling for runtime placeholder */
+        .faq-trigger {
+            width: 100%; padding: var(--spacing-2) var(--spacing-3);
+            display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer; text-align: left; background: none; border: none;
+        }
+        .faq-question { font-size: var(--text-base); font-weight: var(--weight-bold); color: var(--text-main); }
+        .faq-icon-svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-width: 2px; stroke-linecap: round; stroke-linejoin: round; transition: transform var(--transition-normal); color: var(--text-muted); }
+        .faq-content { max-height: 0; overflow: hidden; padding: 0 var(--spacing-3); transition: max-height var(--transition-normal) ease-out; }
+        .faq-answer { padding-bottom: var(--spacing-2); font-size: var(--text-sm); color: var(--text-muted); line-height: var(--lh-relaxed); }
+        .faq-accordion { border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-card); overflow: hidden; transition: border-color var(--transition-normal), box-shadow var(--transition-normal); margin-bottom: var(--spacing-15); }
+        .faq-accordion:hover { border-color: var(--border-color-hover); }
+        .faq-accordion.active { border-color: var(--primary); box-shadow: 0 4px 15px -3px var(--primary-glow); }
+        .faq-accordion.active .faq-icon-svg { transform: rotate(180deg); color: var(--primary); }
+        .faq-accordion.active .faq-content { max-height: 250px; }
+    </style>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Regex Tester - Test Regular Expressions | ToolNest">
+    <meta property="og:description" content="Free offline tools on ToolNest. Built entirely using client-side code for ultimate speed and privacy.">
+    <meta property="og:site_name" content="ToolNest">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Regex Tester - Test Regular Expressions | ToolNest">
+    <meta name="twitter:description" content="Free offline tools on ToolNest. Built entirely using client-side code for ultimate speed and privacy.">
+</head>
+<body data-tool-id="regex-tester">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Mobile Drawer Navigation -->
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay" aria-hidden="true"></div>
+
+    <div id="mobile-drawer" class="mobile-drawer" role="dialog" aria-label="Navigation menu">
+        <div class="mobile-drawer-header">
+            <a href="../../index.html" class="flex items-center gap-1">
+                <div class="icon-wrapper" style="background:var(--gradient-brand);width:2rem;height:2rem;border-radius:var(--radius-sm)">
+                    <svg class="icon" style="color:white;width:1em;height:1em" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                </div>
+                <span class="text-gradient" style="font-weight:var(--weight-extrabold);font-family:var(--font-display);font-size:var(--text-lg)">ToolNest</span>
+            </a>
+            <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Close menu">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <nav class="mobile-drawer-body">
+            <a href="../../index.html" class="mobile-nav-link">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                Homepage
+            </a>
+            <a href="../../index.html#categories" class="mobile-nav-link">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+                All Tools
+            </a>
+            <div class="mobile-drawer-divider"></div>
+            <a href="../../design-system.html" class="mobile-nav-link">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                Design System
+            </a>
+        </nav>
+        <div class="mobile-drawer-footer">
+            <button data-theme-toggle class="btn btn-glass" style="width:100%">
+                <svg class="icon theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                <svg class="icon theme-icon-moon" style="display:none" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                <span class="theme-text-label">Light Mode</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Search Overlay -->
+    <div id="search-overlay" role="dialog" aria-label="Search tools" aria-modal="true">
+        <div class="search-overlay-box">
+            <div class="search-overlay-input-row">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color:var(--text-muted);flex-shrink:0"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <input id="overlay-search-input" type="text" placeholder="Search all tools…" autocomplete="off">
+                <button id="search-overlay-close" class="search-overlay-close">ESC</button>
+            </div>
+            <div id="overlay-search-results" class="search-overlay-results"></div>
+        </div>
+    </div>
+
+    <!-- Sticky Main Navigation Header -->
+    <nav class="main-nav" style="position: sticky; top: 0; z-index: 100; background: var(--glass-bg); border-bottom: 1px solid var(--glass-border); backdrop-filter: var(--glass-backdrop); -webkit-backdrop-filter: var(--glass-backdrop); padding: var(--spacing-15) 0;">
+        <div class="container container-xl flex justify-between items-center">
+            <a href="../../index.html" class="flex items-center gap-1">
+                <div class="icon-wrapper" style="background:var(--gradient-brand);width:2.2rem;height:2.2rem;border-radius:var(--radius-sm)">
+                    <svg class="icon" style="color:white;width:1.1em;height:1.1em" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                </div>
+                <span class="title-3 text-gradient" style="font-weight:var(--weight-extrabold);letter-spacing:-0.02em">ToolNest</span>
+            </a>
+
+            <div class="flex items-center gap-1">
+                <a href="../../index.html#categories" class="btn btn-ghost btn-sm nav-links-desktop">All Tools</a>
+                <button class="nav-search-trigger" data-search-open aria-label="Search (Ctrl+K)">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    <span>Search</span>
+                    <kbd style="font-size:0.6rem;background:var(--border-color);padding:1px 5px;border-radius:4px;color:var(--text-muted)">⌘K</kbd>
+                </button>
+                <button data-theme-toggle class="btn btn-glass btn-sm" aria-label="Toggle theme">
+                    <svg class="icon theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <svg class="icon theme-icon-moon" style="display:none" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+                <button id="hamburger-btn" class="hamburger-btn" aria-label="Open menu">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Workspace -->
+    <!-- Accessibility H1 -->
+    <h1 class="sr-only">Regex Tester</h1>
+    <main id="main-content" class="container container-xl py-4">
+        
+        <!-- Breadcrumbs Placeholder -->
+        <div id="ph-breadcrumbs"></div>
+
+        <!-- Tool Page Hero Placeholder -->
+        <div id="ph-hero"></div>
+
+        <!-- Tool Interface Panel -->
+        <section class="tool-container mb-8" id="tool-interface">
+            <div class="tool-interface-card card-glass">
+                <!-- Pattern row -->
+                <div class="flex flex-col gap-15 mb-3" style="border-bottom:1px solid var(--border-color);padding-bottom:var(--spacing-2);">
+                    <div class="editor-panel-title"><span>Regular Expression</span></div>
+                    <div class="flex gap-1">
+                        <div class="flex items-center gap-05" style="flex-shrink:0;font-family:var(--font-mono);font-size:var(--text-lg);color:var(--text-muted);">/<span>&nbsp;</span></div>
+                        <input id="regex-pattern" class="input" style="font-family:var(--font-mono);flex:1;" placeholder="([a-z]+)\s(\d+)" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                        <div class="flex items-center gap-05" style="font-family:var(--font-mono);font-size:var(--text-lg);color:var(--text-muted);"><span>&nbsp;</span>/</div>
+                        <!-- Flags -->
+                        <div class="flex gap-05 items-center">
+                            <label class="flex items-center gap-025 text-xs" title="Global"><input type="checkbox" id="flag-g" checked> g</label>
+                            <label class="flex items-center gap-025 text-xs" title="Case Insensitive"><input type="checkbox" id="flag-i"> i</label>
+                            <label class="flex items-center gap-025 text-xs" title="Multiline"><input type="checkbox" id="flag-m"> m</label>
+                            <label class="flex items-center gap-025 text-xs" title="Dot All"><input type="checkbox" id="flag-s"> s</label>
+                        </div>
+                    </div>
+                    <div id="regex-error" class="text-xs" style="color:var(--danger);display:none;"></div>
+                </div>
+
+                <div class="tool-split-view mb-3">
+                    <!-- Test String -->
+                    <div class="flex flex-col gap-15">
+                        <div class="editor-panel-title"><span>Test String</span><span id="match-count" class="text-xs text-muted">0 matches</span></div>
+                        <div style="position:relative;flex:1;">
+                            <!-- Highlight layer -->
+                            <div id="highlight-layer" aria-hidden="true" style="position:absolute;top:0;left:0;right:0;bottom:0;padding:var(--spacing-15);font-family:var(--font-mono);font-size:var(--text-sm);white-space:pre-wrap;word-break:break-word;border-radius:var(--radius-md);pointer-events:none;overflow:hidden;line-height:1.6;"></div>
+                            <textarea id="test-string" class="textarea" style="min-height:240px;font-family:var(--font-mono);font-size:var(--text-sm);resize:vertical;background:transparent;position:relative;z-index:1;color:transparent;caret-color:var(--text-primary);" placeholder="Enter test string here..."></textarea>
+                        </div>
+                    </div>
+                    <!-- Match Results -->
+                    <div class="flex flex-col gap-15">
+                        <div class="editor-panel-title"><span>Match Results</span></div>
+                        <div id="match-results" style="flex:1;min-height:240px;overflow-y:auto;border:1px solid var(--border-color);border-radius:var(--radius-md);padding:var(--spacing-2);background:var(--bg-input);">
+                            <p class="text-muted text-sm">Enter a pattern and test string to see matches.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="actions-bar">
+                    <button class="btn btn-ghost" id="tool-reset">Reset</button>
+                    <button class="btn btn-primary" id="btn-copy-matches">Copy Matches</button>
+                </div>
+            </div>
+        </section>
+        <div id="ph-seo"></div>
+        <div id="ph-related"></div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer style="margin-top: var(--spacing-12); padding: var(--spacing-6) 0 var(--spacing-4) 0; border-top: 1px solid var(--border-color); background: var(--bg-card); text-align: left;">
+        <div class="container container-xl">
+            <div class="grid grid-cols-1 grid-md-2 grid-lg-4 gap-4 mb-6">
+                <div>
+                    <h5 class="title-5 mb-1" style="font-weight: var(--weight-extrabold);">ToolNest</h5>
+                    <p class="text-muted text-sm" style="line-height: var(--lh-snug);">Free browser-based utility tools centered around strict data privacy and responsive performance.</p>
+                </div>
+                <div>
+                    <h6 class="title-6 mb-1">Categories</h6>
+                    <ul style="list-style: none;" class="flex flex-col gap-05">
+                        <li><a href="../../index.html#categories" class="text-sm text-muted">PDF Suite</a></li>
+                        <li><a href="../../index.html#categories" class="text-sm text-muted">Image Converters</a></li>
+                        <li><a href="../../index.html#categories" class="text-sm text-muted">Text Tools</a></li>
+                        <li><a href="../../index.html#categories" class="text-sm text-muted">Developer Utilities</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h6 class="title-6 mb-1">Navigation</h6>
+                    <ul style="list-style: none;" class="flex flex-col gap-05">
+                        <li><a href="../../design-system.html" class="text-sm text-muted">Design System</a></li>
+                        <li><a href="../../index.html" class="text-sm text-muted">Homepage</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h6 class="title-6 mb-1">Privacy Guarantee</h6>
+                    <p class="text-sm text-muted">No cloud server interaction. Files remain local inside browser runtime memory blocks.</p>
+                </div>
+            </div>
+            
+            <hr style="border: 0; border-top: 1px solid var(--border-color); margin-bottom: var(--spacing-3);">
+            <div class="text-center">
+                <p class="footer-credit" style="text-align: center;">
+                    © 2026 TOOLNEST — Made with <span style="color:#e25555;">&#10084;&#65039;</span> by
+                    <a class="text-gradient" href="https://ahsan-weha.vercel.app" target="_blank"
+                        rel="noopener noreferrer">
+                        Ahsan Weha
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" aria-label="Back to top">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 15l7-7 7 7"/></svg>
+    </button>
+
+    <!-- Toast stack -->
+    <div id="tn-toast-container"></div>
+
+    <!-- Modal root -->
+    <div id="tn-modal-root"></div>
+
+    <!-- Core scripts -->
+    <script src="../../js/design-system.js"></script>
+    <script src="../../js/app.js"></script>
+    <script src="../placeholder.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
